@@ -1,13 +1,9 @@
-"""
-基于列表的栈实现
-"""
-
-
 class ArrayStack:
 
     # 初始化一个空列表
-    def __init__(self):
+    def __init__(self, maxlen):
         self.data = []
+        self.maxlen = maxlen
 
     # 返回栈的大小
     def __len__(self):
@@ -22,6 +18,8 @@ class ArrayStack:
 
     # 入栈操作
     def push(self, e):
+        if self.__len__() >= self.maxlen:
+            raise Exception('stack is full')
         self.data.append(e)
 
     # 出栈操作
@@ -35,3 +33,10 @@ class ArrayStack:
         if self.is_empty():
             raise Exception('stack is empty')
         return self.data[-1]
+
+
+if __name__ == '__main__':
+    stack = ArrayStack(3)
+    for i in range(0, 4):
+        stack.push(i)
+    print(stack.data)
